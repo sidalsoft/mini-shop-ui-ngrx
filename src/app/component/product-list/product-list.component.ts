@@ -14,8 +14,6 @@ import { productActionTypes } from "../../store/product.actions";
 })
 export class ProductListComponent implements OnInit {
 
-  showEdinProductForm = false
-  selectedProduct: Product
   products$: Observable<Product[]>;
 
 
@@ -24,18 +22,10 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.store.select(getAllProducts);
-
   }
 
   onEditClick(product: Product): void {
-    this.selectedProduct = product;
-    this.showEdinProductForm = true
-  }
-
-  onUpdateFormChange(evt: string) {
-    if (evt == 'close') {
-      this.showEdinProductForm = false
-    }
+    this.store.dispatch(productActionTypes.selectedProduct({product}));
   }
 
   onDeleteClick(productId: number): void {

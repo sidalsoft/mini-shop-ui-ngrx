@@ -17,7 +17,6 @@ import { ProductResolver } from "./product.resolver";
 import { ProductService } from "./services/product.service";
 import { SpinnerService } from "./services/spinner.service";
 import { OurInterceptor } from "./interceptor/our-interceptor.service";
-import { EditProductFormComponent } from './component/edit-product-form/edit-product-form.component';
 
 const routes = [
   {
@@ -36,8 +35,7 @@ const routes = [
     AppComponent,
     NavComponent,
     ProductListComponent,
-    ProductFormComponent,
-    EditProductFormComponent
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,

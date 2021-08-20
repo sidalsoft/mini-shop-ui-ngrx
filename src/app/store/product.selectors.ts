@@ -13,3 +13,7 @@ export const areProductsLoaded = createSelector(
   productFeatureSelector,
   state => state.productsLoaded
 );
+
+export const selectedProduct = createSelector(
+  productFeatureSelector,
+  (productFeatureSelector) => productFeatureSelector.selectedProduct)

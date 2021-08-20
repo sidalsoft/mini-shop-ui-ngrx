@@ -36,7 +36,16 @@ export class ProductEffects {
   updateProduct$ = createEffect(() =>
       this.actions$.pipe(
         ofType(productActionTypes.updateProduct),
-        concatMap((action) => this.productService.updateProduct(action.update.id, action.update.changes))
+        concatMap((action) => this.productService.updateProduct(action.update.id, action.update.changes)),
+        tap(() => this.router.navigateByUrl('/products'))
+      ),
+    {dispatch: false}
+  );
+
+  selectProduct$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(productActionTypes.selectedProduct),
+        tap((product) => !!product.product ? this.router.navigateByUrl('/create-product') : '')
       ),
     {dispatch: false}
   );

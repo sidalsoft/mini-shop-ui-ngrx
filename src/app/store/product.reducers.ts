@@ -5,11 +5,14 @@ import { Product } from "../interfaces/product";
 
 export interface ProductState extends EntityState<Product> {
   productsLoaded: boolean;
+  selectedProduct: Product | null
 }
 
 export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
 
 export const initialState = adapter.getInitialState({
+  products: [],
+  selectedProduct: null,
   productsLoaded: false
 });
 
@@ -24,7 +27,7 @@ export const productReducer = createReducer(
   }),
 
   on(productActionTypes.createProduct, (state, action) => {
-    return adapter.addOne(action.product, state);
+    return adapter.addOne({...action.product, id: state.products.length}, state);
   }),
 
   on(productActionTypes.deleteProduct, (state, action) => {
@@ -33,7 +36,11 @@ export const productReducer = createReducer(
 
   on(productActionTypes.updateProduct, (state, action) => {
     return adapter.updateOne(action.update, state);
-  })
+  }),
+  on(productActionTypes.selectedProduct, (state, action) => ({
+    ...state,
+    selectedProduct: action.product,
+  }))
 );
 
 export const { selectAll, selectIds } = adapter.getSelectors();

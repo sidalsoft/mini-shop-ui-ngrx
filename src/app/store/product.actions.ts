@@ -27,11 +27,17 @@ export const updateProduct = createAction(
   props<{ update: Update<Product> }>()
 );
 
+export const selectedProduct = createAction(
+  '[Products List Operations] Select Product',
+  props<{ product?: Product }>()
+);
+
 
 export const productActionTypes = {
   loadProducts,
   productsLoaded,
   createProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
+  selectedProduct
 };
